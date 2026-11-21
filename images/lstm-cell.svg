@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 420" width="740" height="420" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>LSTM cell</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <!-- Background (keeps it readable in GitHub dark mode) -->
+  <rect x="0" y="0" width="740" height="420" rx="14" fill="#ffffff"/>
+
+  <!-- Cell body -->
+  <rect x="110" y="44" width="530" height="262" rx="18" fill="#eef4fb" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <g stroke="#334155" stroke-width="2" fill="none">
+    <!-- Cell state line -->
+    <path d="M40,80 H208"/>
+    <path d="M232,80 H368"/>
+    <path d="M392,80 H706" marker-end="url(#a)"/>
+
+    <!-- Input bus: h(t-1) and x(t) -->
+    <path d="M40,270 H500"/>
+    <path d="M160,372 V270"/>
+
+    <!-- Bus up into the gates -->
+    <path d="M220,270 V238" marker-end="url(#a)"/>
+    <path d="M300,270 V238" marker-end="url(#a)"/>
+    <path d="M380,270 V238" marker-end="url(#a)"/>
+    <path d="M500,270 V238" marker-end="url(#a)"/>
+
+    <!-- Forget gate -> x on the cell line -->
+    <path d="M220,204 V94" marker-end="url(#a)"/>
+    <!-- Input gate and candidate -> x -> + -->
+    <path d="M300,204 V150 H366" marker-end="url(#a)"/>
+    <path d="M380,204 V164" marker-end="url(#a)"/>
+    <path d="M380,136 V94" marker-end="url(#a)"/>
+    <!-- Output path: tanh(C_t) x o_t -->
+    <path d="M590,80 V116" marker-end="url(#a)"/>
+    <path d="M590,144 V166" marker-end="url(#a)"/>
+    <path d="M500,204 V180 H576" marker-end="url(#a)"/>
+    <path d="M590,194 V270 H706" marker-end="url(#a)"/>
+    <path d="M660,270 V20" marker-end="url(#a)"/>
+  </g>
+
+  <!-- Gate layers -->
+  <g font-size="15" font-weight="600" text-anchor="middle">
+    <rect x="194" y="204" width="52" height="34" rx="8" fill="#f59e0b"/><text x="220" y="226" fill="#1f2937">σ</text>
+    <rect x="274" y="204" width="52" height="34" rx="8" fill="#f59e0b"/><text x="300" y="226" fill="#1f2937">σ</text>
+    <rect x="348" y="204" width="64" height="34" rx="8" fill="#14b8a6"/><text x="380" y="226" fill="#0f172a">tanh</text>
+    <rect x="474" y="204" width="52" height="34" rx="8" fill="#f59e0b"/><text x="500" y="226" fill="#1f2937">σ</text>
+  </g>
+
+  <!-- Pointwise operations -->
+  <g font-size="17" font-weight="700" text-anchor="middle" fill="#1f2937">
+    <circle cx="220" cy="80" r="13" fill="#fce7f3" stroke="#be185d" stroke-width="2"/><text x="220" y="86">×</text>
+    <circle cx="380" cy="80" r="13" fill="#fce7f3" stroke="#be185d" stroke-width="2"/><text x="380" y="86">+</text>
+    <circle cx="380" cy="150" r="13" fill="#fce7f3" stroke="#be185d" stroke-width="2"/><text x="380" y="156">×</text>
+    <circle cx="590" cy="180" r="13" fill="#fce7f3" stroke="#be185d" stroke-width="2"/><text x="590" y="186">×</text>
+    <ellipse cx="590" cy="130" rx="26" ry="14" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/><text x="590" y="135" font-size="13" font-weight="600">tanh</text>
+  </g>
+
+  <!-- Gate names -->
+  <g font-size="12" fill="#475569" text-anchor="start">
+    <text x="228" y="196">forget fₜ</text>
+    <text x="308" y="196">input iₜ</text>
+    <text x="392" y="196">candidate C̃ₜ</text>
+    <text x="508" y="196">output oₜ</text>
+  </g>
+
+  <!-- Inputs and outputs -->
+  <g font-size="15" font-weight="600" fill="#0f172a">
+    <text x="22" y="70">Cₜ₋₁</text>
+    <text x="22" y="260">hₜ₋₁</text>
+    <text x="150" y="394">xₜ</text>
+    <text x="694" y="70">Cₜ</text>
+    <text x="694" y="260">hₜ</text>
+    <text x="672" y="28">hₜ</text>
+  </g>
+
+  <!-- Legend -->
+  <g font-size="12" fill="#334155">
+    <rect x="300" y="340" width="22" height="16" rx="4" fill="#f59e0b"/><text x="328" y="353">sigmoid layer</text>
+    <rect x="430" y="340" width="22" height="16" rx="4" fill="#14b8a6"/><text x="458" y="353">tanh layer</text>
+    <circle cx="551" cy="348" r="9" fill="#fce7f3" stroke="#be185d" stroke-width="2"/><text x="566" y="353">pointwise op</text>
+    <text x="300" y="384" fill="#64748b">Cₜ: cell state (long-term memory) · hₜ: hidden state (output)</text>
+  </g>
+</svg>
